@@ -25,7 +25,7 @@ using namespace std;
  // ================================================================
  //@ <answer>
 
-struct paciente{
+struct paciente {
     string nombre;
     int gravedad;
     int tiempo;
@@ -41,29 +41,26 @@ bool resuelveCaso() {
 
     int nEvents;
     cin >> nEvents;
-
     if (nEvents == 0)
         return false;
 
     char action;
-    string nombre;
-    int gravedad;
-    int tiempo = 0;
-    priority_queue<paciente> pq;
+    string nombre_aux;
+    int gravedad_aux;
+    int tiempo_aux = 0;
+    priority_queue<paciente> cola;
 
     for (int i = 0; i < nEvents; i++)
     {
         cin >> action;
         if (action == 'I') {
-            cin >> nombre >> gravedad;
-            pq.push({nombre,gravedad,tiempo});
-            tiempo++;
-
-
+            cin >> nombre_aux >> gravedad_aux;
+            cola.push({ nombre_aux, gravedad_aux, tiempo_aux }); //O(logn)
+            tiempo_aux++;
         }
         else {
-            cout << pq.top().nombre << endl;
-            pq.pop();
+            cout << cola.top().nombre << endl;//O(1)
+            cola.pop(); //O(logn)
         }
     }
 
@@ -77,7 +74,7 @@ bool resuelveCaso() {
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
 #ifndef DOMJUDGE
-    std::ifstream in("casos.txt");
+    std::ifstream in("casos2.3.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
 #endif
 
