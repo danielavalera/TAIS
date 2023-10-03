@@ -58,7 +58,8 @@ bool resuelveCaso() {
         colaPilasB.push(tiempoVuelo); //O(log n)
     }
     // resolver el caso posiblemente llamando a otras funciones
-    int tiempoVuelo = 0, count_dron = 0;
+    tiempoVuelo = 0;
+    int count_dron = 0;
     vector<vuelo> vuelos;
 
     while (!colaPilasA.empty() && !colaPilasB.empty()) {
