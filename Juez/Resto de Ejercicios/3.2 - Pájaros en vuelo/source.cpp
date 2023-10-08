@@ -13,9 +13,11 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Creamos dos colas, una para almacenar una cola de mínimos y otra para almacenar una de máximos. En
+ estas colas se irán annadiendo las edades de las parejas en función de si es mayor o menor que la edad que
+ encabeza el grupo(eMitad).
+
+ El coste del algoritmo es lineal O(2*parejas).
 
  @ </answer> */
 
@@ -34,32 +36,32 @@ bool resuelveCaso() {
         return false;
 
     // resolver el caso posiblemente llamando a otras funciones
-    int mediana = edad;
+    int eMitad = edad;
     priority_queue<int> menores;
     priority_queue<int, vector<int>, greater<int>> mayores;
 
-    int aux;
+    int edades;
     for (int i = 0; i < 2*parejas; i++)
     {
-        cin >> aux;
-        if (aux < mediana) {
-            menores.push(aux);
+        cin >> edades;
+        if (edades < eMitad) {
+            menores.push(edades);
             if (menores.size() - mayores.size() > 0) {
-                mayores.push(mediana);
-                mediana = menores.top();
+                mayores.push(eMitad);
+                eMitad = menores.top();
                 menores.pop();
             }
         }
         else {
-            mayores.push(aux);
+            mayores.push(edades);
             if (mayores.size() - menores.size() > 1) {
-                menores.push(mediana);
-                mediana = mayores.top();
+                menores.push(eMitad);
+                eMitad = mayores.top();
                 mayores.pop();
             }
         }
 
-        if (i % 2 == 1) cout << mediana << ' ';
+        if (i % 2 == 1) cout << eMitad << ' ';
     }
     // escribir la solución
     cout << '\n';
