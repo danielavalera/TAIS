@@ -14,9 +14,12 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+El problema se representa mediante un grafo no dirigido. Se realiza un recorrido en profundidad sobre la lista
+de adyacencia de cada vértice para conseguir el tamaño de la componente conexa. 
+Si el tamaño de la componente es igual al nº total de vértices, entonces el grafo será conexo.
+Si el valor anterior
+
+El coste es O(V+A).
 
  @ </answer> */
 
@@ -30,7 +33,8 @@ class MaximaCompConexa {
 public:
     bool  freeTree = false;
     bool cicle = false;
-    MaximaCompConexa(Grafo const& g, int v) : visit(g.V(), false) {
+    MaximaCompConexa(Grafo const& g, int v) : 
+        visit(g.V(), false) {
         freeTree = isFreeTree(g, v);
     }
 
@@ -49,7 +53,7 @@ private:
     }
 
     bool isFreeTree(Grafo const& g, int v) {
-        return (g.V() == dfs(g, v, -1)) && !cicle;
+        return (g.V() == dfs(g, v, -1)) && !cicle; //el tamanno de dfs == nº vertices --> conexo y no hay ciclo
     }
 
 };

@@ -1,7 +1,7 @@
 
 /*@ <authors>
  *
- * Nombre, apellidos y usuario del juez (TAISXX) de los autores de la solución.
+ * DANIELA VALENTINA VALERA FUENTES TAIS66
  *
  *@ </authors> */
 
@@ -14,9 +14,13 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ El problema se representa mediante un grafo, donde los vertices representan las personas y las aristas la relación de amistad entre ellas.
+ De esta manera conoceremos la componente conexa más grande.
+
+ Para esto, generamos el grafo que se recorrerá en profundidad por su lista de vertices adyacentes, marcándolos a true cuando se hayan visitado.
+ Cada vez que visitemos un vértice se sumará 1 al tamaño para después conocer el tamaño total de la componente conexa, que se elegirá entre los máximos de cada componente conexa del grafo.
+
+ El coste es O(V+A) donde V es el número de vertices (personas) y A es el número de aristas (relaciones de amistad).
 
  @ </answer> */
 
@@ -27,7 +31,11 @@ using namespace std;
  //@ <answer>
 class MaximaCompConexa {
 public:
-    MaximaCompConexa(Grafo const& g) : visit(g.V(), false), maxim(0) {
+    MaximaCompConexa(Grafo const& g) : 
+        visit(g.V(), false),
+        maxim(0) {
+
+
         for (int v = 0; v < g.V(); ++v) {
             if (!visit[v]) { // se recorre una nueva componente conexa
                 int tam = dfs(g, v);
@@ -43,6 +51,7 @@ public:
 private:
     vector<bool> visit; // visit[v] = se ha visitado el vértice v?
     int maxim; // tamaño de la componente mayor
+
     int dfs(Grafo const& g, int v) {
         visit[v] = true;
         int tam = 1;
