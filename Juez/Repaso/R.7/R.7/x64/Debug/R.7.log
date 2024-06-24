@@ -1,0 +1,12 @@
+﻿  Source.cpp
+C:\Users\fmart\Desktop\UNI\6º\TAIS\Ejercicios\R.7\R.7\Source.cpp(45,16): warning C4244: 'inicializando': conversión de 'const _Ty' a 'int'; posible pérdida de datos
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\fmart\Desktop\UNI\6º\TAIS\Ejercicios\R.7\R.7\Source.cpp(47,16): warning C4244: 'inicializando': conversión de 'const _Ty' a 'int'; posible pérdida de datos
+          with
+          [
+              _Ty=__int64
+          ]
+  R.7.vcxproj -> C:\Users\fmart\Desktop\UNI\6º\TAIS\Ejercicios\R.7\x64\Debug\R.7.exe
