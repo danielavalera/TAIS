@@ -1,6 +1,7 @@
+
 /*@ <authors>
  *
- * DANIELA VALENTINA VALERA FUENTES TAIS66
+ * DANIELA VALENTINA VALERA FUENTES TAIS108
  *
  *@ </authors> */
 
@@ -13,9 +14,23 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+CARACTERÍSTICAS:
+-----------------
+    Candidatos: agujeros de la manguera
+    Test Solución: todos los agujeros deben estar cubiertos con parches
+    Test Factibilidad: verificar que el agujero actual no esté cubierto por el último parche
+    Función objetivo: minimizar el número de parches necesarios
+    Función selección (estrategia voraz): colocar un parche en el primer agujero no cubierto que ocupe tantos agujeros como permita su longitud L
+
+Para esto se ha creado un vector de enteros posAgujero, en el que aparece la posición de la manguera dónde está el agujero.
+Mientras la última posición libre en la manguera (int ultPosLibreSigParche) sea menor que la posición del siguiente agujero en la manguera,
+añadimos un parche para cubrir el siguiente agujero. De esta manera, controlamos cuántos agujeros se pueden cubrir con cada parche.
+
+COSTE:
+-------
+El coste de leer los agujeros tiene un coste de O(N), siendo N = número de agujeros.
+El coste del algoritmo es O(N) ya que la posición de los agujeros está en orden y se recorren todos realizando operaciones
+de coste O(1), ya que los tratamos sólo una vez, en cada vuelta del bucle.
 
  @ </answer> */
 
@@ -25,13 +40,13 @@ using namespace std;
  // ================================================================
  //@ <answer>
 
-int voraz(vector<int> const& agujeros, int L) {
-    int parches = 0, ultParche = -1;
-    for (int i = 0; i < agujeros.size(); i++)
+int voraz(vector<int> const& posAgujero, int L) {
+    int parches = 0, ultPosLibreSigParche = -1;
+    for (int i = 0; i < posAgujero.size(); i++)
     {
-        if (ultParche < agujeros[i]) {
+        if (ultPosLibreSigParche < posAgujero[i]) {
             ++parches;
-            ultParche = agujeros[i] + L;
+            ultPosLibreSigParche = posAgujero[i] + L;
         }
     }
     return parches;
@@ -44,14 +59,14 @@ bool resuelveCaso() {
     if (!std::cin)  // fin de la entrada
         return false;
 
-    vector<int> agujeros(N);
+    vector<int> posAgujero(N);
     for (int i = 0; i < N; i++)
     {
-        cin >> agujeros[i];
+        cin >> posAgujero[i];
     }
     // resolver el caso posiblemente llamando a otras funciones
     // escribir la solución
-    cout << voraz(agujeros, L) << '\n';
+    cout << voraz(posAgujero, L) << '\n';
     return true;
 }
 
