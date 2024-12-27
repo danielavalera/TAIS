@@ -1,6 +1,7 @@
+
 /*@ <authors>
  *
- * DANIELA VALENTINA VALERA FUENTES TAIS66
+ * DANIELA VALENTINA VALERA FUENTES TAIS108
  *
  *@ </authors> */
 
@@ -13,9 +14,23 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+CARACTERÍSTICAS:
+-----------------
+    Candidatos: Películas disponibles para ver.
+    Test Solución: Maximizar el número de películas vistas durante el maratón.
+    Test Factibilidad: La hora de inicio de una película es mayor o igual a la hora de finalización (incluido el descanso) de la anterior película seleccionada.
+    Función objetivo: Maximizar el número de películas que se pueden ver.
+    Función selección (estrategia voraz): Ordenar las películas por hora de finalización, seleccionando siempre la siguiente película que termine más temprano y sea compatible con la selección previa.
+
+Para esto hemos creado un vector que almacena una estructura con la información de cada película. La información es la hora de inicio y de fin
+adaptada a los minutos que tiene un día. Mientras la hora de inicio de la pelicula no sea inferior a la hora de fin (incluyendo el descanso) de 
+la película anterior, podremos ver la película.
+
+COSTE:
+-------
+El coste de leer las películas es O(N), donde N = número de películas.
+El coste del algoritmo es del orden de O(N log N) debido a la ordenación del vector de películas. Después de ordenar el vector se 
+realizan operaciones con coste (O(1)) ya que se accede a estos datos una única vez.
 
  @ </answer> */
 
@@ -33,12 +48,12 @@ bool operator<(pelicula const& p1, pelicula const& p2) {
 }
 
 int voraz(vector<pelicula>& p, int descanso) {
-    int maxPeli = 0, ultPeli = -descanso;
+    int maxPeli = 0, finUltPeli = -descanso;
     for (int i = 0; i < p.size(); i++)
     {
-        if (p[i].ini >= ultPeli + descanso) {
+        if (p[i].ini >= finUltPeli + descanso) {
             maxPeli++;
-            ultPeli = p[i].fin;
+            finUltPeli = p[i].fin;
         }
     }
     return maxPeli;
@@ -49,6 +64,7 @@ bool resuelveCaso() {
     int N; cin >> N;
     if (N==0)  // fin de la entrada
         return false;
+
     int hora, min, duracion;
     char aux;
     vector<pelicula> p(N);

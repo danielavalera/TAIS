@@ -1,6 +1,7 @@
+
 /*@ <authors>
  *
- * DANIELA VALENTINA VALERA FUENTES TAIS66
+ * DANIELA VALENTINA VALERA FUENTES TAIS108
  *
  *@ </authors> */
 
@@ -14,9 +15,24 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+CARACTERÍSTICAS:
+-----------------
+    Candidatos: equipos de defensa disponibles para asignar
+    Test Solución: conseguir el máximo número de ciudades defendidas exitosamente
+    Test Factibilidad: la cantidad de efectivos del equipo de defensa asignado es mayor o igual a los efectivos enemigos de la ciudad correspondiente
+    Función objetivo: maximizar el número de victorias garantizadas
+    Función selección (estrategia voraz): averiguar qué equipo de defensa asignamos a cada equipo Asignar cada equipo de defensa al enemigo más débil que aún no haya sido enfrentado.
+
+Para esto se han creado dos vectores, uno para representar el número de efectivos enemigos por ciudad (vector<int> enemigos) y otro para representar 
+el número de efectivos de defensa (vector<int> defensa). Mientras nuestros efectivos de defensa sean el mismo número o más que los efectivos enemigos,
+podremos asegurar la victoria en esa ciudad. Esto lo conseguimos ordenando los vectores y añadiendo un contador (int cont_e) auxiliar para recorrer el
+vector enemigo, ya que al estar ordenados no va a haber posiblidad de contemplar esa ciudad con una defensa inferior.
+
+COSTE:
+-------
+El coste de leer el número de efectivos tanto de enemigos como de defensa es O(N), siendo N = número de ciudades invadidas y equipos de defensa
+El coste del algoritmo voraz es O(N log N) debido a la ordenación de los vectores. Después se recorre el vector defensa, de tamaño N,
+haciendo operaciones de coste O(1) ya que solo tratamos el dato una vez.
 
  @ </answer> */
 
@@ -44,16 +60,16 @@ int voraz(vector<int>& enemigos, vector<int>& defensa) {
 bool resuelveCaso() {
 
     // leer los datos de la entrada
-    int n; cin >> n;
+    int N; cin >> N;
     if (!std::cin)  // fin de la entrada
         return false;
-    vector<int> enemigos(n);
-    vector<int> defensa(n);
-    for (int i = 0; i < n; i++)
+    vector<int> enemigos(N);
+    vector<int> defensa(N);
+    for (int i = 0; i < N; i++)
     {
         cin >> enemigos[i];
     }
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < N; i++)
     {
         cin >> defensa[i];
     }
