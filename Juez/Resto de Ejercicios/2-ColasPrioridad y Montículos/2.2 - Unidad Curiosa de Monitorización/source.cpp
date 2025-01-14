@@ -26,17 +26,14 @@ del tamaño del problema.
 //@ <answer>
 
 struct registro {
-    long id;
-    int periodo;
-    int momento;
+    int momento, id, periodo;
 };
 
-bool operator<(registro const& user1, registro const& user2) {
-    return user2.momento < user1.momento ||
-        (user1.momento == user2.momento && user2.id < user1.id);
+bool operator<(registro const& a, registro const& b) {
+    return b.momento < a.momento || (a.momento == b.momento && b.id < a.id);
 }
 
-bool resuelveCaso() {
+bool resuelveCaso() { //O(nlogn + klogn)
     // leer los datos de la entrada
     int n;
     cin >> n;
@@ -44,18 +41,17 @@ bool resuelveCaso() {
         return false;
 
     priority_queue<registro> cola;
-    for (int i = 0; i < n; i++) {
-        long id_aux;
-        int periodo_aux;
+    for (int i = 0; i < n; i++) {//O(nlogn)
+        int id_aux, periodo_aux;
         cin >> id_aux >> periodo_aux;
-        cola.push({ id_aux, periodo_aux, periodo_aux }); //O(logn)
+        cola.push({ periodo_aux, id_aux, periodo_aux }); //O(logn)
     }
 
     // resolver el caso posiblemente llamando a otras funciones
     int k;
     cin >> k;
-    for (int i = 0; i < k; i++) {
-        registro primerElemento = cola.top(); //O(1)
+    for (int i = 0; i < k; i++) { //O (k log n)
+        auto primerElemento = cola.top(); //O(1)
         cola.pop(); //O(logn)
         cout << primerElemento.id << '\n';
         primerElemento.momento += primerElemento.periodo;

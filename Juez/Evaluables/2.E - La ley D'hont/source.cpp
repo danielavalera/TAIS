@@ -3,7 +3,6 @@
  *
  * Nombre y Apellidos:
  * Daniela Valentina Valera Fuentes TAIS66
- * Felipe Martin Reyes TAIS36
  *
  *@ </answer> */
 
