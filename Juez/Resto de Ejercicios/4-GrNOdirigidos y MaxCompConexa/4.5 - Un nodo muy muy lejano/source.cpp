@@ -25,10 +25,11 @@ using namespace std;
  // Escribe el código completo de tu solución aquí debajo
  // ================================================================
  //@ <answer>
+ const int INF = 99999999;
 class CaminoMasCorto {
 public:
     CaminoMasCorto(Grafo const& g, int s) : visit(g.V(), false),
-        ant(g.V()), dist(g.V(), INT_MAX), s(s) {
+        ant(g.V()), dist(g.V(), INF), s(s) {
         bfs(g);
     }
     // ¿hay camino del origen a v?
