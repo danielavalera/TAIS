@@ -15,9 +15,19 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ La solución a este problema nos da la posición en la fila que tiene que ocupar una persona para poder obtener el mejor ejemplar de las pilas de comics.
+
+Para ello, se utiliza una cola de prioridad (priority_queue, ordenada ascendentemente según el nº de ejemplar) con las cimas de cada pila..
+En cada iteración, el cliente toma el mejor ejemplar disponible (el de menor identificador), se extrae ese ejemplar de la cola y, si la pila de la que proviene aún tiene más cómics, 
+se introduce el siguiente ejemplar de esa pila a la cola.
+Este proceso se repite hasta que el ejemplar en la cima de la cola sea el de identificador mínimo. 
+
+La variable 'pos' lleva la cuenta de cuántos clientes han pasado antes que nosotros, por lo que esa será la posición que debemos ocupar en la cola para conseguir el mejor ejemplar.
+
+COSTE:
+-------
+El coste de esta solución es O(N * log N + M), donde N es el número de pilas y M el número total de ejemplares. 
+Esto se debe a que se hace una inserción o extracción por cada ejemplar en la estructura de prioridad, y estas operaciones tienen un coste logarítmico en el número de elementos contenidos.
 
  @ </answer> */
 

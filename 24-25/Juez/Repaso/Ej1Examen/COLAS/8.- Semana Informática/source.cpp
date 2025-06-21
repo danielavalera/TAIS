@@ -15,11 +15,25 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+/*@ <answer>
+La solución al problema se basa en saber cuantas personas necesitamos (sin contar con nosotros) para que se pueda asistir a todas las actividades sin solaparse. 
 
- @ </answer> */
+Para ello, se utiliza una cola de prioridad (priority_queue(default: mayor)) ordenanda ascendentemente según su hora de inicio de actividad. 
+Se crea otra cola ordenada ascendentemente según la hora de finalización de las actividades.
+
+Si no hay ninguna persona disponible, es decir, la hora de fin de la actividad es después de que otra empiece, se necesita una persona nueva. 
+Si hay una persona que ha terminado su actividad antes de que comience la actual, se le asigna la nueva actividad.
+
+El tamaño final de la cola de finalizaciones representa el número total de personas necesarias para cubrir las actividades sin solapamiento. 
+Como uno mismo también cuenta, se devuelve el número de compañeros necesarios como 'finalAyudantes.size() - 1'.
+
+COSTE:
+-------
+El coste del algoritmo es O(N log N) siendo N el número de actividades. 
+Esto se debe al uso de colas de prioridad para insertar y extraer actividades y tiempos de finalización, operaciones que tienen coste logarítmico.
+
+@ </answer> */
+
 
 
  // ================================================================
